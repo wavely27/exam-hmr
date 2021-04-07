@@ -7,7 +7,6 @@ const ratio = 1
 const source = Array.from({ length: 20 * ratio }).map(
   () => Math.floor(Math.random() * 100 * ratio) // 0 | ~~
 )
-console.log('source', source)
 
 function handleBubble() {
   let startTime
@@ -74,4 +73,5 @@ function handleQuick() {
   console.log('result', result)
 }
 
-setTimeout(handleInsert, 3000)
+console.log('source', source)
+setTimeout(handleQuick, 3000)
