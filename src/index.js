@@ -1,3 +1,3 @@
 // import './function'
-import './sort'
+import './object'
 // console.log('start', 0)
