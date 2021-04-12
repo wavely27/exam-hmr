@@ -1,5 +1,5 @@
 // json
-// 浅拷贝 Object.assgin
+// 浅拷贝 Object.assgin Object.create Array.concat() slice() Array.from() 扩展运算符 lodash.cloneDeep
 // 递归，循环引用，特殊对象类型
 
 function deepClone(obj, cache) {
