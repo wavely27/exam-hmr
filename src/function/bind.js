@@ -72,3 +72,12 @@ Function.prototype._bind = function (context) {
 
 const str1 = person.fullName._bind(person1, 'Seattle', 'USA')()
 console.log('fullName: ', str1)
+
+
+Function.prototype._bind = function (context) {
+  context = context ? Object.create(context) : window
+  context[Symbol('fn')] = this
+  return function (...rest) {
+    return context[fn].call(context, ...args, ...rest)
+  }
+}

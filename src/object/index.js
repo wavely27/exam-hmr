@@ -1,6 +1,6 @@
-// object extend
+// object extends
 // clone (deep\shallow\sort)
 // regexp
 // import './clone'
-import './object'
+import './extend'
 // import './regexp'

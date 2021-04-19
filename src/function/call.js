@@ -20,12 +20,9 @@ console.log('fullName: ', str)
 // 5.删除临时函数 返回执行结果
 
 Function.prototype._call = function (context) {
-  console.log('context', context)
-
   context = context ? Object.create(context) : window
   const fn = Symbol('fn')
   context[fn] = this
-
   const args = []
   for (let i = 1; i < arguments.length; i++) {
     args.push(`arguments[${i}]`)
@@ -50,3 +47,9 @@ function fn2() {
 
 fn1._call(fn2)
 fn1.call.call.call.call(fn2)
+
+
+function t(ctx) {
+  const context = ctx ? Object.create(ctx) : window
+  return ctx
+}

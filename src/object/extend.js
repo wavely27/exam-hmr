@@ -77,10 +77,10 @@ Parent4.prototype.say = say
 const c4 = new Child4()
 const c4_ = new Child4()
 c4.arr.push(4)
-console.log('c4 ===> ', c4);
-console.log('c4_ ===> ', c4_);
-console.log('c4 instanceof Child4 ===> ', c4 instanceof Child4);
-console.log('c4 instanceof Parent4 ===> ', c4 instanceof Parent4);
+// console.log('c4 ===> ', c4);
+// console.log('c4_ ===> ', c4_);
+// console.log('c4 instanceof Child4 ===> ', c4 instanceof Child4);
+// console.log('c4 instanceof Parent4 ===> ', c4 instanceof Parent4);
 // console.log('c4.constructor ===> ', c4.constructor);
 
 // 寄生组合继承 
@@ -104,11 +104,38 @@ Parent5.prototype.say = say
 const c5 = new Child5()
 const c5_ = new Child5()
 c5.arr.push(4)
-console.log('c5 ===> ', c5);
-console.log('c5_ ===> ', c5_);
-
+// console.log('c5 ===> ', c5);
+// console.log('c5_ ===> ', c5_);
 // console.log('c5.arr ===> ', c5.arr);
 // console.log('c5_.arr ===> ', c5_.arr);
 // console.log('c5 instanceof Child5 ===> ', c5 instanceof Child5);
 // console.log('c5 instanceof Parent5 ===> ', c5 instanceof Parent5);
 // console.log('c5.constructor ===> ', c5.constructor);
+
+// ES6 继承
+
+class Parent6 {
+  constructor() {
+    this.name = ['parent6']
+    this.arr = [1, 2, 3]
+    this.say = say
+  }
+  test() {
+    console.log('test ===> ');
+  }
+}
+class Child6 extends Parent6 {
+  constructor() {
+    super()
+    this.type = 'child6'
+  }
+}
+const c6 = new Child6()
+const c6_ = new Child6()
+c6.arr.push(4)
+console.log('c6 ===> ', c6);
+console.log('c6_ ===> ', c6_);
+console.log('c6.arr ===> ', c6.arr);
+console.log('c6_.arr ===> ', c6_.arr);
+c6.say()
+c6_.test()
