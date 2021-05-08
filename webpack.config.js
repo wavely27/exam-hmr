@@ -8,6 +8,7 @@ module.exports = {
     contentBase: './dist',
     hot: true,
     port: 5000,
+    open: true,
   },
   plugins: [new HtmlWebpackPlugin({ title: 'Exam-HMR' })],
 }

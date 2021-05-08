@@ -1,8 +1,10 @@
 // import './function'
 // import './object'
 // import './promise'
-// import './temp'
+import './temp'
+// import './subject'
+// import './algorithm'
 // import './vue'
 // import './optimization'
-import './struct'
+// import './struct'
 // console.log('start', 0)
