@@ -28,11 +28,19 @@ function flatBySome(arr) {
   return result
 }
 
+function flatByReduce(arr) {
+  return arr.reduce((pre, cur) => {
+    return pre.concat(Array.isArray(cur) ? flatByReduce(cur) : cur)
+  }, [])
+}
+
 const flatResult = flat(arr)
 const flatByStringResult = flatByString(arr)
 const flatByJSONResult = flatByJSON(arr)
 const flatBySomeResult = flatBySome(arr)
+const flatByReduceResult = flatByReduce(arr)
 console.log(flatResult, ' <=== flat result')
 console.log(flatByStringResult, ' <=== flatByString result')
 console.log(flatByJSONResult, ' <=== flatByJSON result')
 console.log(flatBySomeResult, ' <=== flatBySome result')
+console.log(flatByReduceResult, ' <=== flatByReduce result')

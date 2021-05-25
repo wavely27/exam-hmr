@@ -113,7 +113,6 @@ c5.arr.push(4)
 // console.log('c5.constructor ===> ', c5.constructor);
 
 // ES6 继承
-
 class Parent6 {
   constructor() {
     this.name = ['parent6']
@@ -139,3 +138,7 @@ console.log('c6.arr ===> ', c6.arr);
 console.log('c6_.arr ===> ', c6_.arr);
 c6.say()
 c6_.test()
+
+// 现代组合继承
+
+// function Child7 TODO

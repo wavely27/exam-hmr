@@ -35,6 +35,12 @@ function deepClone(obj, cache) {
 // cache.push(result)
 // ===================
 
+function objClass() {
+  this.go = function () {
+    console.log(10, ' <=== 10');
+  }
+}
+
 const obj1 = {
   a: 1,
   b: 2,
@@ -61,7 +67,10 @@ const obj2 = {
   a: 1,
 }
 
-// obj1.next = obj2
+// 添加继承
+Object.setPrototypeOf(obj1, objClass.prototype)
+
+obj1.next = obj2
 obj2.next = obj1
 
 const obj3 = deepClone(obj2)
@@ -79,29 +88,25 @@ function deepCloneJson(target) {
 function deepCloneRecursion(target, cache = new Map()) {
   // 判断基本类型
   if (typeof target !== 'object' || target === null) return target
-
   // 判断特殊对象类型
   if (target instanceof RegExp || target instanceof Date) {
     const Constructor = Object.getPrototypeOf(target).constructor
     return new Constructor(target)
   }
-
   // 判断循环引用
   if (cache.has(target)) {
     return cache.get(target)
   }
-
   // 修复继承关系
   // 判断函数
-
-  const result = Array.isArray(target) ? [] : {}
+  const result = Array.isArray(target) ? [] : new target.constructor()
   cache.set(target, result)
   const map = [
     ...Object.getOwnPropertyNames(target), // 过滤非私有
     ...Object.getOwnPropertySymbols(target), // 包含Symbol类型
   ]
   map.forEach((key) => {
-    result[key] = deepCloneRecursion(target[key])
+    result[key] = deepCloneRecursion(target[key], cache)
   })
   return result
 }
@@ -115,3 +120,6 @@ console.log(
   obj4[arr4[0]] === obj1[arr1[0]],
   ' <=== obj4[arr[0]] === obj1[arr1[0]]'
 )
+
+console.log(obj1 instanceof objClass, ' <=== obj1 instanceof objClass');
+console.log(obj4 instanceof objClass, ' <=== obj4 instanceof objClass');

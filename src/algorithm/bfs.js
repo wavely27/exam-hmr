@@ -1,19 +1,4 @@
-function wideTraversal(node) {
-  let nodeList = []
-  if (node) {
-    let queue = []
-    queue.unshift(node)
-    while(queue.length) {
-      const child = queue.shift()
-      nodeList.push(child)
-      const children = child.children
-      for(let i=0; i < children.length; i++) {
-        queue.push(children[i])
-      }
-    }
-  }
-  return nodeList
-}
+// 广度优先遍历 BFS
 
 const root = {
   id: -1,
@@ -26,40 +11,55 @@ const root = {
           children: [
             {
               id: 5,
-              children: []
+              children: [],
             },
             {
               id: 8,
               children: [
                 {
                   id: 9,
-                  children: []
-                }
-              ]
+                  children: [],
+                },
+              ],
             },
-          ]
+          ],
         },
         {
           id: 2,
-          children: []
+          children: [],
         },
-      ]
+      ],
     },
     {
       id: 6,
       children: [
         {
           id: 10,
-          children: []
-        }
-      ]
+          children: [],
+        },
+      ],
     },
     {
       id: 7,
-      children: []
+      children: [],
     },
-  ]
+  ],
 }
 
-const res = wideTraversal(root)
-console.log(res, ' <=== res');
+const res = breadthFirstSearch(root)
+console.log(res, ' <=== res')
+
+function breadthFirstSearch(root) {
+  const result = []
+  const stack = []
+  stack.push(root)
+  while (stack.length) {
+    const current = stack.shift()
+    result.push(current.id)
+    const { children } = current
+    children.forEach((item) => {
+      stack.push(item)
+    })
+  }
+  return result
+}

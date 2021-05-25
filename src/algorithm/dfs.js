@@ -1,34 +1,6 @@
-// recursion
-// function deepTraversal(node, nodelist) {
-//   if (node) {
-//     nodelist.push(node)
-//     let children = node.children;
-//     for (let i = 0; i < children.length; i++) {
-//       deepTraversal(children[i], nodelist)
-//     }
-//   }
-//   return nodelist;
-// }
+// 深度优先遍历 DFS
 
-function deepTraversal(node) {
-  let nodeList = []
-  let stack = []
-  if (node) {
-    stack.push(node)
-    while (stack.length) {
-      let child = stack.pop()
-      console.log(child, ' <=== child');
-      nodeList.push(child)
-      let children = child.children
-      for (let i = children.length - 1; i >= 0; i--) {
-        stack.push(children[i])
-      }
-    }
-  }
-  return nodeList
-}
-
-const root = {
+const tree = {
   id: -1,
   children: [
     {
@@ -39,40 +11,114 @@ const root = {
           children: [
             {
               id: 5,
-              children: []
+              children: [],
             },
             {
               id: 8,
               children: [
                 {
                   id: 9,
-                  children: []
-                }
-              ]
+                  children: [],
+                },
+              ],
             },
-          ]
+          ],
         },
         {
           id: 2,
-          children: []
+          children: [],
         },
-      ]
+      ],
     },
     {
       id: 6,
       children: [
         {
           id: 10,
-          children: []
-        }
-      ]
+          children: [],
+        },
+      ],
     },
     {
       id: 7,
-      children: []
+      children: [],
     },
-  ]
+  ],
 }
 
-const res = deepTraversal(root)
-console.log(res, ' <=== res');
+const resRe = deepTraversalRe(tree)
+const resStack = deepTraversalStack(tree)
+const resRF = rootFisrtSearch(tree)
+const resLF = leafFisrtSearch(tree)
+console.log(resRe, ' <=== resRe')
+console.log(resStack, ' <=== resStack')
+console.log(resRF, ' <=== resRF')
+console.log(resLF, ' <=== resLF')
+
+// 递归
+function deepTraversalRe(node, result = []) {
+  if (node) {
+    result.push(node.id)
+    let { children } = node
+    children.forEach((item) => deepTraversalRe(item, result))
+  }
+  return result
+}
+
+// 使用栈
+function deepTraversalStack(root) {
+  const result = []
+  const stack = []
+  stack.push(root)
+  while (stack.length) {
+    const current = stack.pop()
+    result.push(current.id)
+    const arr = [...current.children]
+    if (Array.isArray(arr)) {
+      arr.reverse().forEach((item) => {
+        stack.push(item)
+      })
+    }
+  }
+  return result
+}
+
+function rootFisrtSearch(root) {
+  const result = []
+  const stack = []
+  stack.push(root)
+  while (stack.length) {
+    const current = stack.pop()
+    result.push(current.id)
+    const arr = [...current.children]
+    if (Array.isArray(arr)) {
+      arr.reverse().forEach((item) => {
+        stack.push(item)
+      })
+    }
+  }
+  return result
+}
+
+function leafFisrtSearch(root) {
+  const result = []
+  const stack = []
+  stack.push(root)
+  while (stack.length) {
+    const current = stack.pop()
+    const arr = [...current.children]
+    if (Array.isArray(arr) && arr.length !== 0) {
+      const curr = {
+        id: current.id,
+        children: []
+      }
+      stack.push(curr)
+      arr.reverse().forEach((item) => {
+        stack.push(item)
+      })
+    } else {
+      result.push(current.id)
+    }
+  }
+  return result
+}
